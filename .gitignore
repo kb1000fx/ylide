@@ -106,3 +106,5 @@ dist
 data.db
 
 sessions
+
+public/stylesheets/style.css
