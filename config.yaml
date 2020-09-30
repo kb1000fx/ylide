@@ -1,0 +1,32 @@
+enableSignUp: true
+announcement:
+  autoShow: false
+  content: 暂无公告
+repository:
+  - ItemID: 1
+    Item: item1
+    ItemAdress: Lab
+  - ItemID: 2
+    Item: item2
+    ItemAdress: Lab
+  - ItemID: 3
+    Item: item3
+    ItemAdress: Lab
+  - ItemID: 4
+    Item: item4
+    ItemAdress: Lab
+  - ItemID: 5
+    Item: item5
+    ItemAdress: Lab
+  - ItemID: 6
+    Item: item6
+    ItemAdress: Lab
+  - ItemID: 7
+    Item: item7
+    ItemAdress: Lab
+  - ItemID: 8
+    Item: item8
+    ItemAdress: Lab
+  - ItemID: 9
+    Item: item9
+    ItemAdress: Lab

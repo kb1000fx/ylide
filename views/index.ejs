@@ -1,0 +1,70 @@
+<%- include('before', {WebTitle: '中科大SOFC实验室预约系统'}); %>
+
+<div id="top-container" class="mdui-container-fluid mdui-color-blue-600">
+    <div id="user-info" class="mdui-float-right">
+        <button class="mdui-btn mdui-ripple-red" mdui-menu="{target: '#user-info-menu'}" ><i class="mdui-icon mdui-icon-left material-icons"><%= icon %></i> <%= username %> (<%= id %>) </button>
+        <ul class="mdui-menu" id="user-info-menu">
+            <li class="mdui-menu-item">
+                <a href="javascript:showAnnouncement(true);" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">announcement</i>公告
+                </a>
+            </li>
+            <li class="mdui-menu-item">
+                <a href="javascript:;" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">brightness_2</i>夜间模式
+                </a>
+            </li>
+            <li class="mdui-menu-item">
+                <a href="/logout" class="mdui-ripple">
+                    <i class="mdui-menu-item-icon mdui-icon material-icons">exit_to_app</i>退出登录
+                </a>
+            </li>
+          </ul>
+    </div>
+    
+    <div id="announcement-dialog" class="mdui-dialog">
+        <div class="mdui-dialog-title"></div>
+        <div class="mdui-dialog-content"></div>
+        <div class="mdui-dialog-actions">
+            <button class="mdui-btn mdui-ripple" mdui-dialog-close>确认</button>
+        </div>
+    </div>
+</div>
+
+<div id="bottom-container" class="mdui-container">
+    <div id="main-card" class="mdui-card mdui-center mdui-shadow-12">
+        <div id="input-row" class="mdui-row">
+            <div class="mdui-col-offset-xs-1 mdui-col-xs-4">
+                <div class="mdui-textfield  mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">预约日期</label>
+                    <input id="datepicker" autocomplete="off" class="mdui-textfield-input" type="text" required/>
+                    <div class="mdui-textfield-error">请选择预约日期</div>
+                </div>
+            </div>
+            <div class="mdui-col-xs-3">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">材料</label>
+                    <input id="material-input" class="mdui-textfield-input" type="text" required/>
+                    <div class="mdui-textfield-error">请输入材料</div>
+                </div>
+            </div>
+            <div class="mdui-col-xs-3">
+                <div class="mdui-textfield mdui-textfield-floating-label">
+                    <label class="mdui-textfield-label">温度</label>
+                    <input id="temperature-input" class="mdui-textfield-input" type="text" required/>
+                    <div class="mdui-textfield-error">请输入温度</div>
+                </div>
+            </div>
+        </div>
+        <div id="button-row" class="mdui-row">
+            <div class="mdui-col-offset-xs-3 mdui-col-xs-3">
+                <button onclick="refreshPanel()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">刷新</button>      
+            </div>
+            <div class="mdui-col-xs-3">
+                <button onclick="submit()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">预约</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('after'); %>  
