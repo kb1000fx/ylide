@@ -2,6 +2,11 @@ var $ = mdui.$;
 
 
 $(function (){ 
+    if (localStorage.getItem('RS4SOFC-dark')=='true') {
+        $('body').addClass('mdui-theme-layout-dark');
+        $('#user-menu-darkmode a').html('<i class="mdui-menu-item-icon mdui-icon material-icons">brightness_5</i>日间模式');
+        $('#top-container').removeClass('mdui-color-blue-600');
+    }
     if (window.location.pathname=='/') {
         initItemPanel();      
         laydate.render({
@@ -14,6 +19,20 @@ $(function (){
         showAnnouncement(false);
     }
 });
+
+function changeNightMode(){
+    if ($('body').hasClass('mdui-theme-layout-dark')) {
+        $('body').removeClass('mdui-theme-layout-dark');
+        $('#user-menu-darkmode a').html('<i class="mdui-menu-item-icon mdui-icon material-icons">brightness_2</i>夜间模式');
+        $('#top-container').toggleClass('mdui-color-blue-600');
+        localStorage.removeItem('RS4SOFC-dark');
+    } else {
+        $('body').addClass('mdui-theme-layout-dark');
+        $('#user-menu-darkmode a').html('<i class="mdui-menu-item-icon mdui-icon material-icons">brightness_5</i>日间模式');
+        $('#top-container').toggleClass('mdui-color-blue-600');
+        localStorage.setItem('RS4SOFC-dark', true);
+    }
+};
 
 function showAnnouncement(manual){
     $.ajax({
@@ -57,13 +76,14 @@ function login() {
     var user = $('#login-user input').val();
     var pwd = $('#login-pwd input').val();
     var isRemember = $('#login-check').is(':checked');
+    var hashPWD = CryptoJS.SHA256(pwd).toString()
 
     $.ajax({
         method: 'POST',
         url: '/api/login',
         data: {
             id: user,
-            pwd: pwd,
+            pwd: hashPWD,
             isRemember: isRemember,
         },
         success: function (response) {
@@ -88,13 +108,14 @@ function signup(){
     var repwd = $('#signup-repwd input').val();
 
     if((user!="")&&(name!="")&&(pwd!="")&&(repwd!="")&&(pwd==repwd)){
+        var hashPWD = CryptoJS.SHA256(pwd).toString()
         $.ajax({
             method: 'POST',
             url: '/api/signup',
             data: {
                 id: user,
                 name: name,
-                pwd: pwd, 
+                pwd: hashPWD, 
             },
             success: function (response) {
                 var res = JSON.parse(response);
@@ -153,22 +174,27 @@ function initItemPanel(){
                     '</div>';                 
 
             for (let obj of res) {
-                let status, statusClass;
+                let status, statusClass, letUserName, letMaterial, letTemperature, letRented, letExpired;
+                let expiredDate = new Date(obj.Expired);
 
-                if (obj.Expired=="无") {
+                if (expiredDate>new Date()) {
+                    status = "已预约";
+                    statusClass = "status-busy";
+                    letUserName = obj.UserName; 
+                    letMaterial = obj.Material; 
+                    letTemperature = obj.Temperature; 
+                    letRented = obj.Rented; 
+                    letExpired = obj.Expired;
+                } else {
                     status = "可预约";
                     statusClass = "status-idle";
-                } else {
-                    let expiredDate = new Date(obj.Expired);
-                    //console.log(expiredDate)
-                    if (expiredDate>new Date()) {
-                        status = "已预约";
-                        statusClass = "status-busy";
-                    } else {
-                        status = "可预约";
-                        statusClass = "status-idle";
-                    }
+                    letUserName = "无"; 
+                    letMaterial = "无"; 
+                    letTemperature = "无"; 
+                    letRented = "无"; 
+                    letExpired = "无";
                 }
+
 
                 panelBody += 
                 '<div id="panel-item-' + obj.ItemID + '" class="mdui-panel-item">'+
@@ -179,11 +205,11 @@ function initItemPanel(){
                         '</label>'+
                         '<div class="mdui-panel-item-summary">' + obj.Item + '</div>'+
                         '<div class="mdui-panel-item-summary ' + statusClass + '">'+ status + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + obj.UserName + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + obj.Material + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + obj.Temperature + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + obj.Rented + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + obj.Expired + '</div>'+
+                        '<div class="mdui-panel-item-summary">' + letUserName + '</div>'+
+                        '<div class="mdui-panel-item-summary">' + letMaterial + '</div>'+
+                        '<div class="mdui-panel-item-summary">' + letTemperature + '</div>'+
+                        '<div class="mdui-panel-item-summary">' + letRented + '</div>'+
+                        '<div class="mdui-panel-item-summary">' + letExpired + '</div>'+
                         '<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'+
                     '</div>'+
                     '<div class="mdui-panel-item-body">'+
@@ -226,10 +252,9 @@ function initHistory(id){
                         '</tr></thead>'+
                         '<tbody>';
             for (let obj of history) {
-                console.log(obj)
                 str += 
                     '<tr>'+
-                    '<td>' + obj.Time + '</td>'+
+                    '<td class="col-time">' + obj.Time + '</td>'+
                     '<td>' + obj.UserName + '</td>'+
                     '<td>' + obj.Material + '</td>'+
                     '<td>' + obj.Temperature + '</td>'+
@@ -285,4 +310,30 @@ function submit(){
 function refreshPanel(){
     $('#main-card .mdui-panel').remove();
     initItemPanel();
+};
+
+function deleteHistory(){
+    var history = [];
+    $('.mdui-table-row-selected .col-time').text(function(index,content){
+        history.push(content)
+    });
+    if (history.length) {
+        $.ajax({
+            method: 'POST',
+            url: '/api/delete',
+            data: {
+                history: history,
+            },
+            success: function (response) {
+                if (JSON.parse(response).isAdmin){
+                    refreshPanel();
+                    mdui.snackbar("删除成功！");
+                } else {
+                    mdui.snackbar("改完还是无权进行操作，请联系管理员");
+                }
+            }
+        });
+    } else {
+        mdui.snackbar("未选中需删除的记录");
+    }
 };

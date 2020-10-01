@@ -2,15 +2,15 @@
 
 <div id="top-container" class="mdui-container-fluid mdui-color-blue-600">
     <div id="user-info" class="mdui-float-right">
-        <button class="mdui-btn mdui-ripple-red" mdui-menu="{target: '#user-info-menu'}" ><i class="mdui-icon mdui-icon-left material-icons"><%= icon %></i> <%= username %> (<%= id %>) </button>
-        <ul class="mdui-menu" id="user-info-menu">
+        <button class="mdui-btn mdui-ripple-red" mdui-menu="{target: '#user-menu'}" ><i class="mdui-icon mdui-icon-left material-icons"><%= icon %></i> <%= username %> (<%= id %>) </button>
+        <ul class="mdui-menu" id="user-menu">
             <li class="mdui-menu-item">
                 <a href="javascript:showAnnouncement(true);" class="mdui-ripple">
                     <i class="mdui-menu-item-icon mdui-icon material-icons">announcement</i>公告
                 </a>
             </li>
-            <li class="mdui-menu-item">
-                <a href="javascript:;" class="mdui-ripple">
+            <li id="user-menu-darkmode" class="mdui-menu-item">
+                <a href="javascript:changeNightMode();" class="mdui-ripple">
                     <i class="mdui-menu-item-icon mdui-icon material-icons">brightness_2</i>夜间模式
                 </a>
             </li>
@@ -61,11 +61,14 @@
             </div>
         </div>
         <div id="button-row" class="mdui-row">
-            <div class="mdui-col-offset-xs-3 mdui-col-xs-3">
+            <div class="mdui-col-xs-4">
                 <button onclick="refreshPanel()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">刷新</button>      
             </div>
-            <div class="mdui-col-xs-3">
+            <div class="mdui-col-xs-4">
                 <button onclick="submit()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">预约</button>
+            </div>
+            <div class="mdui-col-xs-4">
+                <button onclick="deleteHistory()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme" <%= delButton %> >删除记录</button>
             </div>
         </div>
     </div>

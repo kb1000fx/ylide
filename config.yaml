@@ -1,11 +1,16 @@
+# 是否开放注册
 enableSignUp: true
+
+#公告
 announcement:
-  autoShow: false
-  content: 暂无公告
+  autoShow: false     #进入首页后自动展示
+  content: 暂无公告    #公告内容
+
+#设备
 repository:
-  - ItemID: 1
-    Item: item1
-    ItemAdress: Lab
+  - ItemID: 1         #设备编号，从1开始的整数
+    Item: item1       #设备名称
+    ItemAdress: Lab   #设备地址(未启用)
   - ItemID: 2
     Item: item2
     ItemAdress: Lab

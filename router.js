@@ -18,9 +18,10 @@ router.post('/api/login', function(req, res){
             if (!eval(req.body.isRemember)) {
                 req.session.cookie.expires = false;
             }
-            req.session.userID = req.body.id; // 登录成功，设置 session
+            req.session.userID = req.body.id; 
             SQLiteOp.getNameByID(db, req.body.id).then((resolve)=>{
                 req.session.userName = resolve.UserName;
+                req.session.isAdmin = resolve.IsAdmin;
                 res.send({isAccountExist: true, isLogin: true});
             });       
         } else {
@@ -68,6 +69,17 @@ router.post('/api/submit', function(req, res){
         res.send({success: resolve});
     });
 });
+
+//删除记录
+router.post('/api/delete', function(req, res){ 
+    if (req.session.isAdmin) {
+        SQLiteOp.deleteHistory(db, req.body.history).then((resolve)=>{
+            res.send({isAdmin: true})
+        });
+    } else {
+        res.send({isAdmin: false})
+    }
+});
   
 //获取公告
 router.get('/api/announcement', function (req, res) {
@@ -105,6 +117,7 @@ router.get('/', function (req, res) {
                 id: req.session.userID,
                 username: resolve.UserName,
                 icon:  (resolve.IsAdmin)?"star":"person",
+                delButton:  (resolve.IsAdmin)?"":"disabled",
             });
         });
     }else{

@@ -11,14 +11,14 @@ const tableList = {
         "Rented      TEXT ," +
         "Expired     TEXT " ,
     History:
-        "ItemID      INT PRIMARY KEY NOT NULL," +
+        "Time        TEXT  PRIMARY KEY  NOT NULL," +
+        "ItemID      INT  NOT NULL," +
         "UserName    TEXT ," +
         "UserID      TEXT ," +
         "Material    TEXT ," +
         "Temperature TEXT ," +
         "Rented      TEXT ," +
-        "Expired     TEXT ," +
-        "Time        TEXT",
+        "Expired     TEXT " ,
     Account:
         "UserID     TEXT PRIMARY KEY NOT NULL ," +
         "UserName   TEXT             NOT NULL ," +
@@ -89,7 +89,6 @@ Op.isIdle = function(db, id){
         } else if (expiredTime > nowTime) {
             return false
         } else {
-            console.log('333')
             return true
         }
     });
@@ -107,6 +106,10 @@ Op.UpdateData = async function(db, obj){
     );
         
     return true
+};
+
+Op.deleteHistory = function(db, history){
+    return runSQL(db, "DELETE FROM History WHERE Time = '" + String(history).replace(',', "' OR Time = '") + "' ")
 };
 
 Op.addAccount = function(db, obj){
@@ -172,7 +175,7 @@ async function initDB(db){
             for (let e of Op.itemList) {
                 await runSQL(db, 
                     "INSERT INTO Item (ItemID, Item, Adress, UserName, UserID, Material, Temperature, Rented, Expired) " +
-                    "VALUES (" + e.ItemID + ", '" + e.Item + "', '" + e.ItemAdress + "', '无', '无', '无', '无', '无', '无' )"
+                    "VALUES (" + e.ItemID + ", '" + e.Item + "', '" + e.ItemAdress + "', '无', '无', '无', '无', '1970-01-01 00:00:00', '1970-01-01 00:00:01' )"
                 );
             }
             console.log('\x1b[32mTables has been inited\x1B[0m');
