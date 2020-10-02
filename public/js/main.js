@@ -239,7 +239,8 @@ function initHistory(id){
         },
         success: function (response) {
             var history = JSON.parse(response).history;
-            var str = 
+            var str = "";
+            var strHead = 
                 '<div class="mdui-table-fluid mdui-shadow-0 mdui-table-hoverable">'+
                     '<table class="mdui-table mdui-table-selectable">'+
                         '<thead><tr>'+
@@ -252,7 +253,7 @@ function initHistory(id){
                         '</tr></thead>'+
                         '<tbody>';
             for (let obj of history) {
-                str += 
+                str = 
                     '<tr>'+
                     '<td class="col-time">' + obj.Time + '</td>'+
                     '<td>' + obj.UserName + '</td>'+
@@ -260,9 +261,10 @@ function initHistory(id){
                     '<td>' + obj.Temperature + '</td>'+
                     '<td>' + obj.Rented + '</td>'+
                     '<td>' + obj.Expired + '</td>'+               
-                    '</tr>';
+                    '</tr>'
+                    + str;
             }
-            str += "</tbody></table></div>";
+            str = strHead + str + "</tbody></table></div>";
             $('#panel-item-' + id + ' .mdui-panel-item-body').empty();
             $('#panel-item-' + id + ' .mdui-panel-item-body').append(str);          
             mdui.mutation();

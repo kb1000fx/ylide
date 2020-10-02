@@ -25,13 +25,11 @@ const tableList = {
         "IsAdmin    INT              NOT NULL ," +
         "PassWord   TEXT             NOT NULL ",
 };
-
 var Op ={ };
 
 
 Op.dbList = [ ];
 Op.itemList = [ ];
-
 
 Op.connectDB = function(dbFileName){
     try {
@@ -98,7 +96,7 @@ Op.UpdateData = async function(db, obj){
     await runSQL(db, 
         "UPDATE Item SET UserName = '" + obj.UserName + "', UserID = '" + obj.UserID + 
         "', Material = '" + obj.Material + "', Temperature = '" + obj.Temperature + 
-        "', Rented = '" + obj.Rented + "', Expired = '" + obj.Expired + "' WHERE ItemID = " + obj.ItemID); //.then(()=>{
+        "', Rented = '" + obj.Rented + "', Expired = '" + obj.Expired + "' WHERE ItemID = " + obj.ItemID); 
     
     await runSQL(db,
         "INSERT INTO History (ItemID, UserID, UserName, Material, Temperature, Rented, Expired, Time) "+
@@ -110,6 +108,38 @@ Op.UpdateData = async function(db, obj){
 
 Op.deleteHistory = function(db, history){
     return runSQL(db, "DELETE FROM History WHERE Time = '" + String(history).replace(',', "' OR Time = '") + "' ")
+};
+
+Op.refreshItem = async function(db){
+    for (let obj of Op.itemList) {
+        let UserName, UserID, Material, Temperature, Rented, Expired, resolve;
+        resolve = await getSQL(db, "SELECT * FROM History WHERE ItemID = " + obj.ItemID + " ORDER BY Time DESC");
+
+        if (resolve!=undefined) {
+            UserName = resolve.UserName;
+            UserID = resolve.UserID;
+            Material = resolve.Material;
+            Temperature = resolve.Temperature;
+            Rented = resolve.Rented;
+            Expired = resolve.Expired;
+        } else {
+            UserName = '无';
+            UserID = '无';
+            Material = '无';
+            Temperature = '无';
+            Rented = '1970-01-01 00:00:00';
+            Expired = '1970-01-01 00:00:01';
+        }
+
+        await runSQL(db, 
+            "UPDATE Item SET UserName = '" + UserName + "', UserID = '" + UserID + 
+            "', Material = '" + Material + "', Temperature = '" + Temperature + 
+            "', Rented = '" + Rented + "', Expired = '" + Expired + "' WHERE ItemID = " + obj.ItemID
+        )
+       
+    }
+
+    return true
 };
 
 Op.addAccount = function(db, obj){

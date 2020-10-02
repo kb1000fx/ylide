@@ -74,6 +74,8 @@ router.post('/api/submit', function(req, res){
 router.post('/api/delete', function(req, res){ 
     if (req.session.isAdmin) {
         SQLiteOp.deleteHistory(db, req.body.history).then((resolve)=>{
+            return SQLiteOp.refreshItem(db)
+        }).then((resolve)=>{
             res.send({isAdmin: true})
         });
     } else {
