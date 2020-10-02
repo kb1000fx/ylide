@@ -1,5 +1,5 @@
 # 中科大SOFC实验室高温炉预约系统
-![Node.JS](https://img.shields.io/badge/node.js-≥8.2.0-brightgreen)
+![Node.JS](https://img.shields.io/badge/node.js-≥8.2.0-brightgreen)   
 基于 NodeJS + Express + SQLite 的实验室设备预约系统，前端部分使用MDUI框架实现。
 
 # 使用方法
