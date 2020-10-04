@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const stylus = require('stylus');
 const path = require('path');
-
+const fs=require('fs');
 
 var app = express();
 var Router = require('./router')(app);
@@ -13,11 +13,17 @@ var Router = require('./router')(app);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-// 使用bodyparder中间件
+//使用bodyparser解析post
 app.use(bodyparser.json()); 
 app.use(bodyparser.urlencoded({ extended: true }));
+//日志输出
+if (process.env.NODE_ENV != 'production') {
+    app.use(logger('dev')); 
+} else {
+    const logStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'});
+    app.use(logger('combined', {stream: logStream})); 
+}
 //express init
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

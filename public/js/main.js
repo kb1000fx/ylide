@@ -15,6 +15,7 @@ $(function (){
             calendar: true,
             type: 'datetime',
             range: true,
+            min: 0,
         });
         showAnnouncement(false);
     }

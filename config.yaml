@@ -9,29 +9,32 @@ announcement:
 #设备
 repository:
   - ItemID: 1         #设备编号，从1开始的整数
-    Item: item1       #设备名称
+    Item: 设备1       #设备名称
     ItemAdress: Lab   #设备地址(未启用)
   - ItemID: 2
-    Item: item2
+    Item: 设备2
     ItemAdress: Lab
   - ItemID: 3
-    Item: item3
+    Item: 设备3
     ItemAdress: Lab
   - ItemID: 4
-    Item: item4
+    Item: 设备4
     ItemAdress: Lab
   - ItemID: 5
-    Item: item5
+    Item: 设备5
     ItemAdress: Lab
   - ItemID: 6
-    Item: item6
+    Item: 设备6
     ItemAdress: Lab
   - ItemID: 7
-    Item: item7
+    Item: 设备7
     ItemAdress: Lab
   - ItemID: 8
-    Item: item8
+    Item: 设备8
     ItemAdress: Lab
   - ItemID: 9
-    Item: item9
+    Item: 设备9
+    ItemAdress: Lab
+  - ItemID: 10
+    Item: 设备10
     ItemAdress: Lab
