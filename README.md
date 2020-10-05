@@ -29,6 +29,12 @@ npm run dev
 npm run admin <UserID1> <UserID2> <UserID3>...
 ```
 将已注册的指定账户设为管理员，仅管理员可对历史记录进行删除
+### 刷新数据库
+当修改完`config.yaml`文件中的配置项后，可使用下面命令来删除数据库中已有的`Item`与`History`表，并重新读取`config.yaml`文件中的配置进行建立
+```bash
+npm run refresh
+```
+当然，直接删除数据库文件也可以达到目的，但是这样会同时丢失已注册的账户信息
 
 # 目录结构
 

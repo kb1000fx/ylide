@@ -166,16 +166,16 @@ function initItemPanel(){
                         '<div class="mdui-panel-item-summary head-font">设备</div>'+
                         '<div class="mdui-panel-item-summary head-font">状态</div>'+
                         '<div class="mdui-panel-item-summary head-font">使用者</div>'+
-                        '<div class="mdui-panel-item-summary head-font">材料</div>'+
-                        '<div class="mdui-panel-item-summary head-font">温度</div>'+
-                        '<div class="mdui-panel-item-summary head-font">预约开始时间</div>'+
-                        '<div class="mdui-panel-item-summary head-font">预约结束时间</div>'+
+                        '<div class="mdui-panel-item-summary panel-material head-font">材料</div>'+
+                        '<div class="mdui-panel-item-summary panel-temperature head-font">温度</div>'+
+                        '<div class="mdui-panel-item-summary panel-rented head-font">预约开始时间</div>'+
+                        '<div class="mdui-panel-item-summary panel-expired head-font">预约结束时间</div>'+
                         '<i class="mdui-panel-item-arrow mdui-icon material-icons" style="visibility: hidden;">keyboard_arrow_down</i>'+
                         '</div>'+
                     '</div>';                 
 
             for (let obj of res) {
-                let status, statusClass, letUserName, letMaterial, letTemperature, letRented, letExpired;
+                let status, statusClass, letUserName, letMaterial, letTemperature, letRented, letExpired, letItem;
                 let expiredDate = new Date(obj.Expired);
 
                 if (expiredDate>new Date()) {
@@ -196,6 +196,11 @@ function initItemPanel(){
                     letExpired = "无";
                 }
 
+                if (obj.Description) {
+                    letItem = '<div class="panel-item">' + obj.Item + '</div>'+  '<div class="panel-description">' + obj.Description + '</div>' 
+                } else {
+                    letItem = '<div class="panel-item">' + obj.Item + '</div>'
+                }
 
                 panelBody += 
                 '<div id="panel-item-' + obj.ItemID + '" class="mdui-panel-item">'+
@@ -204,13 +209,13 @@ function initItemPanel(){
                             '<input id="selector-' + obj.ItemID + '" type="radio" name="panel-selector"/>'+
                             '<i class="mdui-radio-icon"></i>'+
                         '</label>'+
-                        '<div class="mdui-panel-item-summary">' + obj.Item + '</div>'+
+                        '<div class="mdui-panel-item-summary">'+ letItem + '</div>'+
                         '<div class="mdui-panel-item-summary ' + statusClass + '">'+ status + '</div>'+
                         '<div class="mdui-panel-item-summary">' + letUserName + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + letMaterial + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + letTemperature + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + letRented + '</div>'+
-                        '<div class="mdui-panel-item-summary">' + letExpired + '</div>'+
+                        '<div class="mdui-panel-item-summary panel-material">' + letMaterial + '</div>'+
+                        '<div class="mdui-panel-item-summary panel-temperature">' + letTemperature + '</div>'+
+                        '<div class="mdui-panel-item-summary panel-rented">' + letRented + '</div>'+
+                        '<div class="mdui-panel-item-summary panel-expired">' + letExpired + '</div>'+
                         '<i class="mdui-panel-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>'+
                     '</div>'+
                     '<div class="mdui-panel-item-body">'+

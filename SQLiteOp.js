@@ -3,7 +3,7 @@ const tableList = {
     Item :
         "ItemID      INT PRIMARY KEY NOT NULL," +
         "Item        TEXT            NOT NULL," +
-        "Adress      TEXT            NOT NULL," +
+        "Description TEXT ," +
         "UserName    TEXT ," +
         "UserID      TEXT ," +
         "Material    TEXT ," +
@@ -203,9 +203,16 @@ async function initDB(db){
     try {
         if(Op.itemList.length) {
             for (let e of Op.itemList) {
+                var Description;
+                if(e.Description){
+                    var Description = "'" + e.Description + "'"
+                }else{
+                    var Description = 'NULL'
+                }
+                
                 await runSQL(db, 
-                    "INSERT INTO Item (ItemID, Item, Adress, UserName, UserID, Material, Temperature, Rented, Expired) " +
-                    "VALUES (" + e.ItemID + ", '" + e.Item + "', '" + e.ItemAdress + "', '无', '无', '无', '无', '1970-01-01 00:00:00', '1970-01-01 00:00:01' )"
+                    "INSERT INTO Item (ItemID, Item, Description, UserName, UserID, Material, Temperature, Rented, Expired) " +
+                    "VALUES (" + e.ItemID + ", '" + e.Item + "', " + Description + ", '无', '无', '无', '无', '1970-01-01 00:00:00', '1970-01-01 00:00:01' )"
                 );
             }
             console.log('\x1b[32mTables has been inited\x1B[0m');

@@ -47,6 +47,29 @@
     font-size: 17px
 }
 
+.panel-description{
+    margin-top: 4px
+    font-size: 14px
+    opacity: 0.75
+}
+
+.panel-item{
+    font-size: 16px
+    font-weight: 700
+}
+
+@media only screen and (max-width: 600px) {
+    .panel-temperature, .panel-material {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 1023px) {
+    .panel-rented, .panel-expired {
+        display: none;
+    }
+}
+
 .status-busy{
     color: red
 }

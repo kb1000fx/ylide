@@ -5,6 +5,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node ./bin/www",
     "admin": "node ./bin/admin",
+    "refresh": "node ./bin/refresh && npm start",
     "dev": "cross-env DEBUG=* NODE_ENV=development node  ./bin/www"
   },
   "dependencies": {
