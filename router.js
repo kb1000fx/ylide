@@ -56,7 +56,7 @@ router.post('/api/signup', function(req, res){
 
 //提交更改
 router.post('/api/submit', function(req, res){ 
-    SQLiteOp.isIdle(db, req.body.ItemID).then((resolve)=>{
+    SQLiteOp.isIdle(db, req.body.ItemID, req.body.Rented).then((resolve)=>{
         if (resolve) {
             var obj = req.body;
             obj.UserID = req.session.userID;

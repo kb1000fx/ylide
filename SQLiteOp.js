@@ -78,13 +78,14 @@ Op.isExist = function(db, id){
     });
 };
 
-Op.isIdle = function(db, id){  
+Op.isIdle = function(db, id, rented){  
     return getSQL(db, "SELECT Expired FROM Item WHERE ItemID = " + id).then((resolve)=>{
-        var expiredTime = new Date(resolve.Expired)
-        var nowTime = new Date()
+        var expiredTime = new Date(resolve.Expired);
+        var newRented = new Date(rented);
+
         if (resolve.Expired == "无") {
             return true
-        } else if (expiredTime > nowTime) {
+        } else if (expiredTime > newRented) {
             return false
         } else {
             return true
