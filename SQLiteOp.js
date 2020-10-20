@@ -101,7 +101,7 @@ Op.UpdateData = async function(db, obj){
     
     await runSQL(db,
         "INSERT INTO History (ItemID, UserID, UserName, Material, Temperature, Rented, Expired, Time) "+
-        "VALUES ( " + obj.ItemID + ", '" +  obj.UserID + "', '" + obj.UserName + "', '" + obj.Material + "', '" + obj.Temperature + "', '" + obj.Rented + "', '" + obj.Expired + "', '" + new Date().toLocaleString() + "' )"
+        "VALUES ( " + obj.ItemID + ", '" +  obj.UserID + "', '" + obj.UserName + "', '" + obj.Material + "', '" + obj.Temperature + "', '" + obj.Rented + "', '" + obj.Expired + "', '" + new Date().toLocaleString('chinese',{hour12:false}) + "' )"
     );
         
     return true
