@@ -16,6 +16,12 @@ $(function (){
             type: 'datetime',
             range: true,
             min: 0,
+            trigger: 'click',
+            done: function(){
+                setTimeout(function(){ 
+                    $('#datepicker').trigger('blur') 
+                }, 20);
+            },
         });
         showAnnouncement(false);
     }
