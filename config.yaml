@@ -1,6 +1,9 @@
 # 是否开放注册
 enableSignUp: true
 
+# 历史记录排列顺序 
+historyOrder: asc        # asc升序 desc降序
+
 #公告
 announcement:
   autoShow: false      #进入首页后自动展示

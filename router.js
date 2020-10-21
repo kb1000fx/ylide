@@ -107,7 +107,10 @@ router.get('/api/itemList', function (req, res) {
 router.get('/api/history', function (req, res) {
     var id = req.query.id;
     SQLiteOp.getItemHistory(db, id).then((resolve)=>{
-        res.send({history: resolve});
+        res.send({
+            history: resolve,
+            order:  config.historyOrder
+        });
     });
 });
 

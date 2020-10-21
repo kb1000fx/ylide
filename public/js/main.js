@@ -251,32 +251,51 @@ function initHistory(id){
         },
         success: function (response) {
             var history = JSON.parse(response).history;
+            var order = JSON.parse(response).order;
             var str = "";
-            var strHead = 
-                '<div class="mdui-table-fluid mdui-shadow-0 mdui-table-hoverable">'+
-                    '<table class="mdui-table mdui-table-selectable">'+
-                        '<thead><tr>'+
-                            '<th>预约时间</th>'+
-                            '<th>使用者</th>'+
-                            '<th>材料</th>'+
-                            '<th>温度</th>'+
-                            '<th>开始时间</th>'+
-                            '<th>结束时间</th>'+                        
-                        '</tr></thead>'+
-                        '<tbody>';
             for (let obj of history) {
-                str = 
-                    '<tr>'+
-                    '<td class="col-time">' + obj.Time + '</td>'+
-                    '<td>' + obj.UserName + '</td>'+
-                    '<td>' + obj.Material + '</td>'+
-                    '<td>' + obj.Temperature + '</td>'+
-                    '<td>' + obj.Rented + '</td>'+
-                    '<td>' + obj.Expired + '</td>'+               
-                    '</tr>'
-                    + str;
+                let status, statusClass;
+                if (new Date(obj.Expired) > new Date()) {
+                    statusClass = "status-undone"
+                    status = "待完成"
+                } else {
+                    statusClass = "status-done"
+                    status = "已完成"
+                }
+                let appendStr = '<tr>'+
+                                '<td>' + obj.Time + '</td>'+
+                                '<td class="' + statusClass + '">' + status + '</td>'+
+                                '<td>' + obj.UserName + '</td>'+
+                                '<td>' + obj.Material + '</td>'+
+                                '<td>' + obj.Temperature + '</td>'+
+                                '<td>' + obj.Rented + '</td>'+
+                                '<td>' + obj.Expired + '</td>'+               
+                                '</tr>';
+                if (order=='asc') {
+                    str = str + appendStr;
+                } else if(order=='desc'){
+                    str = appendStr + str;
+                } else {
+                    console.error("History Order Error!");
+                    break; 
+                }
             }
-            str = strHead + str + "</tbody></table></div>";
+            str =   '<div class="mdui-table-fluid mdui-shadow-0 mdui-table-hoverable">'+
+                        '<table class="mdui-table mdui-table-selectable">'+
+                            '<thead><tr>'+
+                                '<th>预约时间</th>'+
+                                '<th>预约状态</th>'+
+                                '<th>使用者</th>'+
+                                '<th>材料</th>'+
+                                '<th>温度</th>'+
+                                '<th>开始时间</th>'+
+                                '<th>结束时间</th>'+                        
+                            '</tr></thead>'+
+                            '<tbody>'+
+                                str+
+                            "</tbody>"+
+                        "</table>"+
+                    "</div>";
             $('#panel-item-' + id + ' .mdui-panel-item-body').empty();
             $('#panel-item-' + id + ' .mdui-panel-item-body').append(str);          
             mdui.mutation();
