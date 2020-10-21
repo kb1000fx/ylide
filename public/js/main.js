@@ -263,7 +263,7 @@ function initHistory(id){
                     status = "已完成"
                 }
                 let appendStr = '<tr>'+
-                                '<td>' + obj.Time + '</td>'+
+                                '<td class="col-time">' + obj.Time + '</td>'+
                                 '<td class="' + statusClass + '">' + status + '</td>'+
                                 '<td>' + obj.UserName + '</td>'+
                                 '<td>' + obj.Material + '</td>'+
