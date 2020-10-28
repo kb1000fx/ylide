@@ -11,29 +11,41 @@ announcement:
 
 #设备
 repository:
-  - ItemID: 1             #设备编号，从1开始的整数
-    Item: 设备1           #设备名称
-    Description: 描述1    #设备说明(可选项，非必须)
-  - ItemID: 2
-    Item: 设备2
-    Description: 描述2
-  - ItemID: 3
-    Item: 设备3
-    Description: 描述3
-  - ItemID: 4
-    Item: 设备4
-  - ItemID: 5
-    Item: 设备5
-  - ItemID: 6
-    Item: 设备6
-    Description: 描述6
-  - ItemID: 7
-    Item: 设备7
-    Description: 描述7
-  - ItemID: 8
-    Item: 设备8
-  - ItemID: 9
-    Item: 设备9
-  - ItemID: 10
-    Item: 设备10
-    Description: 描述10
+  - tab: tab1                  #组名
+    showTimeInfo: true         #是否显示时间信息
+    header: 
+      - 材料
+      - 温度
+    list:
+      - ItemID: 1             #设备编号，从1开始的整数
+        Item: 设备1           #设备名称
+        Description: 描述1    #设备说明(可选项，非必须)
+      - ItemID: 2
+        Item: 设备2
+        Description: 描述2
+      - ItemID: 3
+        Item: 设备3
+        Description: 描述3
+      - ItemID: 4
+        Item: 设备4
+      - ItemID: 5
+        Item: 设备5
+    
+  - tab: tab2
+    showTimeInfo: false
+    header: 
+      - 气氛
+    list:
+      - ItemID: 6
+        Item: 设备6
+        Description: 描述6
+      - ItemID: 7
+        Item: 设备7
+        Description: 描述7
+      - ItemID: 8
+        Item: 设备8
+      - ItemID: 9
+        Item: 设备9
+      - ItemID: 10
+        Item: 设备10
+        Description: 描述10

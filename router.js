@@ -93,13 +93,22 @@ router.get('/api/announcement', function (req, res) {
 
 //获取设备列表
 router.get('/api/itemList', function (req, res) {
-    var itemList = [];
+    var tabList = [];
     (async ()=>{
         for (let obj of config.repository) {
-            let itemInfo = await SQLiteOp.selectAllByItemID(db, obj.ItemID)
-            itemList.push(itemInfo);
+            let itemList = [];
+            for (let e of obj.list) {
+                let itemInfo = await SQLiteOp.selectAllByItemID(db, e.ItemID)
+                itemList.push(itemInfo);
+            }
+            tabList.push({
+                tab: obj.tab,
+                header: obj.header,
+                list: itemList,
+                showTimeInfo: (((typeof obj.showTimeInfo)!="boolean")?(true):(obj.showTimeInfo))
+            });
         }   
-        res.send(itemList); 
+        res.send(tabList); 
     })();  
 });
 
