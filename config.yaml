@@ -13,7 +13,7 @@ announcement:
 repository:
   - tab: tab1                  #组名
     showTimeInfo: true         #是否显示时间信息
-    header: 
+    header:                    
       - 材料
       - 温度
     list:
@@ -49,3 +49,39 @@ repository:
       - ItemID: 10
         Item: 设备10
         Description: 描述10
+
+  - tab: tab3
+    showTimeInfo: false
+    header: 
+    list:
+      - ItemID: 11             
+        Item: 设备11           
+        Description: 描述11    
+      - ItemID: 12
+        Item: 设备12
+        Description: 描述12
+      - ItemID: 13
+        Item: 设备13
+        Description: 描述13
+      - ItemID: 14
+        Item: 设备14
+      - ItemID: 15
+        Item: 设备15
+
+  - tab: tab4
+    showTimeInfo: true
+    header: 
+    list:
+      - ItemID: 16
+        Item: 设备16
+        Description: 描述16
+      - ItemID: 17
+        Item: 设备17
+        Description: 描述17
+      - ItemID: 18
+        Item: 设备18
+      - ItemID: 19
+        Item: 设备19
+      - ItemID: 20
+        Item: 设备20
+        Description: 描述20

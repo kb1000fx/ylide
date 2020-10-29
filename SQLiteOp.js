@@ -77,30 +77,40 @@ Op.isExist = function(db, id){
     });
 };
 
-Op.isIdle = function(db, id, rented){  
-    return getSQL(db, "SELECT Expired FROM Item WHERE ItemID = " + id).then((resolve)=>{
-        var expiredTime = new Date(resolve.Expired);
-        var newRented = new Date(rented);
-
-        if (resolve.Expired == "无") {
-            return true
-        } else if (expiredTime > newRented) {
-            return false
-        } else {
-            return true
+Op.isIdle = function(db, obj){  
+    var index;
+    Op.itemList.forEach((e,i)=>{
+        if(e.tab==obj.Tab){
+            index = i
         }
     });
+    if(Op.itemList[index].showTimeInfo){
+        return getSQL(db, "SELECT Expired FROM Item WHERE ItemID = " + obj.ItemID).then((resolve)=>{
+            var expiredTime = new Date(resolve.Expired);
+            var newRented = new Date(obj.Rented);   
+            if (resolve.Expired == "无") {
+                return true
+            } else if (expiredTime > newRented) {
+                return false
+            } else {
+                return true
+            }
+        });
+    }else{
+        return new Promise((resolve)=>{
+            resolve(true)
+        })
+    }
 };
 
 Op.UpdateData = async function(db, obj){
     await runSQL(db, 
         "UPDATE Item SET UserName = '" + obj.UserName + "', UserID = '" + obj.UserID + 
-        "', Material = '" + obj.Material + "', Temperature = '" + obj.Temperature + 
-        "', Rented = '" + obj.Rented + "', Expired = '" + obj.Expired + "' WHERE ItemID = " + obj.ItemID); 
+        "', Attach = '" + (obj.Attach?JSON.stringify(obj.Attach):'{}') + "', Rented = '" + obj.Rented + "', Expired = '" + obj.Expired + "' WHERE ItemID = " + obj.ItemID); 
     
     await runSQL(db,
-        "INSERT INTO History (ItemID, UserID, UserName, Material, Temperature, Rented, Expired, Time) "+
-        "VALUES ( " + obj.ItemID + ", '" +  obj.UserID + "', '" + obj.UserName + "', '" + obj.Material + "', '" + obj.Temperature + "', '" + obj.Rented + "', '" + obj.Expired + "', '" + new Date().toLocaleString('chinese',{hour12:false}) + "' )"
+        "INSERT INTO History (ItemID, UserID, UserName, Attach, Rented, Expired, Time) "+
+        "VALUES ( " + obj.ItemID + ", '" +  obj.UserID + "', '" + obj.UserName + "', '" + (obj.Attach?JSON.stringify(obj.Attach):'{}') + "', '" + obj.Rented + "', '" + obj.Expired + "', '" + new Date().toLocaleString('chinese',{hour12:false}) + "' )"
     );
         
     return true
@@ -112,33 +122,28 @@ Op.deleteHistory = function(db, history){
 
 Op.refreshItem = async function(db){
     for (let obj of Op.itemList) {
-        let UserName, UserID, Material, Temperature, Rented, Expired, resolve;
-        resolve = await getSQL(db, "SELECT * FROM History WHERE ItemID = " + obj.ItemID + " ORDER BY Time DESC");
-
+        let UserName, UserID, Attach, Rented, Expired;
+        let resolve = await getSQL(db, "SELECT * FROM History WHERE ItemID = " + obj.ItemID + " ORDER BY Time DESC");
+        console.log(resolve)
         if (resolve!=undefined) {
             UserName = resolve.UserName;
             UserID = resolve.UserID;
-            Material = resolve.Material;
-            Temperature = resolve.Temperature;
+            Attach = resolve.Attach;
             Rented = resolve.Rented;
             Expired = resolve.Expired;
         } else {
             UserName = '无';
             UserID = '无';
-            Material = '无';
-            Temperature = '无';
+            Attach = '{}';
             Rented = '1970-01-01 00:00:00';
             Expired = '1970-01-01 00:00:01';
         }
 
         await runSQL(db, 
             "UPDATE Item SET UserName = '" + UserName + "', UserID = '" + UserID + 
-            "', Material = '" + Material + "', Temperature = '" + Temperature + 
-            "', Rented = '" + Rented + "', Expired = '" + Expired + "' WHERE ItemID = " + obj.ItemID
+            "', Attach = '" + Attach + "', Rented = '" + Rented + "', Expired = '" + Expired + "' WHERE ItemID = " + obj.ItemID
         )
-       
     }
-
     return true
 };
 
@@ -204,10 +209,12 @@ async function initDB(db){
         if(Op.itemList.length) {
             for (let element of Op.itemList) {
                 for (let e of element.list) {        
-                    let attach = {};   
-                    element.header.forEach(t=>{
-                        attach[t] = null
-                    }); 
+                    let attach = {}; 
+                    if(element.header){
+                        element.header.forEach(t=>{
+                            attach[t] = null
+                        }); 
+                    }  
                     await runSQL(db, 
                         "INSERT INTO Item (ItemID, Item, Tab, Description, UserName, UserID, Attach, Rented, Expired) " +
                         "VALUES (" + e.ItemID + ", '" + e.Item + "', '" + element.tab + "', " + ((e.Description)?("'"+e.Description+"'"):('NULL')) + ", NULL, NULL, '" + JSON.stringify(attach) + "', '1970-01-01 00:00:00', '1970-01-01 00:00:01' )"

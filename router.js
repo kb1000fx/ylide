@@ -56,12 +56,11 @@ router.post('/api/signup', function(req, res){
 
 //提交更改
 router.post('/api/submit', function(req, res){ 
-    SQLiteOp.isIdle(db, req.body.ItemID, req.body.Rented).then((resolve)=>{
+    SQLiteOp.isIdle(db, req.body).then((resolve)=>{
         if (resolve) {
-            var obj = req.body;
-            obj.UserID = req.session.userID;
-            obj.UserName = req.session.userName;
-            return SQLiteOp.UpdateData(db, obj)
+            req.body.UserID = req.session.userID;
+            req.body.UserName = req.session.userName;
+            return SQLiteOp.UpdateData(db, req.body)
         } else {
             return false
         }
@@ -105,7 +104,7 @@ router.get('/api/itemList', function (req, res) {
                 tab: obj.tab,
                 header: obj.header,
                 list: itemList,
-                showTimeInfo: (((typeof obj.showTimeInfo)!="boolean")?(true):(obj.showTimeInfo))
+                showTimeInfo: obj.showTimeInfo
             });
         }   
         res.send(tabList); 
