@@ -129,6 +129,7 @@ router.get('/', function (req, res) {
             res.render('index', {
                 id: req.session.userID,
                 username: resolve.UserName,
+                isAdmin: resolve.IsAdmin,
                 icon:  (resolve.IsAdmin)?"star":"person",
                 delButton:  (resolve.IsAdmin)?"":"disabled",
             });

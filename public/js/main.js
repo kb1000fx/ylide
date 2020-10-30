@@ -4,8 +4,10 @@ var $ = mdui.$;
 $(function (){ 
     if (localStorage.getItem('RS4SOFC-dark')=='true') {
         $('body').addClass('mdui-theme-layout-dark');
-        $('#user-menu-darkmode a').html('<i class="mdui-menu-item-icon mdui-icon material-icons">brightness_5</i>日间模式');
-        $('#top-container').removeClass('mdui-color-blue-600');
+        var themeEl = $('.mdui-color-theme-600');
+        themeEl.removeClass('mdui-color-theme-600');
+        themeEl.addClass('theme-dark-element');
+        $('#nightmode_switch').prop('checked', true);
     }
     if (window.location.pathname=='/') {
         $('body').addClass('mdui-appbar-with-toolbar mdui-appbar-with-tab');
@@ -17,13 +19,15 @@ $(function (){
 function changeNightMode(){
     if ($('body').hasClass('mdui-theme-layout-dark')) {
         $('body').removeClass('mdui-theme-layout-dark');
-        $('#user-menu-darkmode a').html('<i class="mdui-menu-item-icon mdui-icon material-icons">brightness_2</i>夜间模式');
-        $('#top-container').toggleClass('mdui-color-blue-600');
+        var darkEl = $('.theme-dark-element'); 
+        darkEl.removeClass('theme-dark-element');
+        darkEl.addClass('mdui-color-theme-600');
         localStorage.removeItem('RS4SOFC-dark');
     } else {
         $('body').addClass('mdui-theme-layout-dark');
-        $('#user-menu-darkmode a').html('<i class="mdui-menu-item-icon mdui-icon material-icons">brightness_5</i>日间模式');
-        $('#top-container').toggleClass('mdui-color-blue-600');
+        var themeEl = $('.mdui-color-theme-600');
+        themeEl.removeClass('mdui-color-theme-600');
+        themeEl.addClass('theme-dark-element');
         localStorage.setItem('RS4SOFC-dark', true);
     }
 };

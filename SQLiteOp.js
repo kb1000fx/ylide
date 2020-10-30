@@ -121,29 +121,31 @@ Op.deleteHistory = function(db, history){
 };
 
 Op.refreshItem = async function(db){
-    for (let obj of Op.itemList) {
-        let UserName, UserID, Attach, Rented, Expired;
-        let resolve = await getSQL(db, "SELECT * FROM History WHERE ItemID = " + obj.ItemID + " ORDER BY Time DESC");
-        console.log(resolve)
-        if (resolve!=undefined) {
-            UserName = resolve.UserName;
-            UserID = resolve.UserID;
-            Attach = resolve.Attach;
-            Rented = resolve.Rented;
-            Expired = resolve.Expired;
-        } else {
-            UserName = '无';
-            UserID = '无';
-            Attach = '{}';
-            Rented = '1970-01-01 00:00:00';
-            Expired = '1970-01-01 00:00:01';
+    for(let e of Op.itemList){
+        for (let obj of e.list) {
+            let UserName, UserID, Attach, Rented, Expired;
+            let resolve = await getSQL(db, "SELECT * FROM History WHERE ItemID = " + obj.ItemID + " ORDER BY Time DESC");
+            console.log(resolve)
+            if (resolve!=undefined) {
+                UserName = resolve.UserName;
+                UserID = resolve.UserID;
+                Attach = resolve.Attach;
+                Rented = resolve.Rented;
+                Expired = resolve.Expired;
+            } else {
+                UserName = '无';
+                UserID = '无';
+                Attach = '{}';
+                Rented = '1970-01-01 00:00:00';
+                Expired = '1970-01-01 00:00:01';
+            }
+    
+            await runSQL(db, 
+                "UPDATE Item SET UserName = '" + UserName + "', UserID = '" + UserID + 
+                "', Attach = '" + Attach + "', Rented = '" + Rented + "', Expired = '" + Expired + "' WHERE ItemID = " + obj.ItemID
+            )
         }
-
-        await runSQL(db, 
-            "UPDATE Item SET UserName = '" + UserName + "', UserID = '" + UserID + 
-            "', Attach = '" + Attach + "', Rented = '" + Rented + "', Expired = '" + Expired + "' WHERE ItemID = " + obj.ItemID
-        )
-    }
+    }  
     return true
 };
 

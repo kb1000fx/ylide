@@ -1,35 +1,42 @@
 <%- include('before', {WebTitle: '中科大SOFC实验室预约系统'}); %>
 
-<header class="mdui-appbar mdui-appbar-fixed mdui-shadow-0 mdui-color-blue-600">
+<header class="mdui-appbar mdui-appbar-fixed mdui-shadow-0 mdui-color-theme-600">
     <div class="mdui-toolbar">
-        <a href="javascript:;" mdui-drawer="{target: 'aside', swipe: true}" class="mdui-btn mdui-btn-icon"><i class="mdui-icon material-icons">menu</i></a>
-        <span class="mdui-typo-headline">中科大SOFC实验室高温炉预约系统</span>
+        <button class="mdui-btn mdui-btn-icon" mdui-drawer="{target: 'aside', swipe: true}"><i class="mdui-icon material-icons">menu</i></button>
+        <span class="mdui-typo-headline">中科大SOFC实验室预约系统</span>
         <div class="mdui-toolbar-spacer"></div> 
-        <div id="user-info">
-            <button class="mdui-btn mdui-ripple-red" mdui-menu="{target: '#user-info .mdui-menu'}" ><i class="mdui-icon mdui-icon-left material-icons"><%= icon %></i> <%= username %> (<%= id %>) </button>
-            <ul class="mdui-menu">
-                <li class="mdui-menu-item">
-                    <a href="javascript:showAnnouncement(true);" class="mdui-ripple">
-                        <i class="mdui-menu-item-icon mdui-icon material-icons">announcement</i>公告
-                    </a>
-                </li>
-                <li id="user-menu-darkmode" class="mdui-menu-item">
-                    <a href="javascript:changeNightMode();" class="mdui-ripple">
-                        <i class="mdui-menu-item-icon mdui-icon material-icons">brightness_2</i>夜间模式
-                    </a>
-                </li>
-                <li class="mdui-menu-item">
-                    <a href="/logout" class="mdui-ripple">
-                        <i class="mdui-menu-item-icon mdui-icon material-icons">exit_to_app</i>退出登录
-                    </a>
-                </li>
-            </ul>
-        </div>
+        <button id="right-header-btn" class="mdui-btn mdui-ripple-red" mdui-drawer="{target: 'aside', swipe: true}" ><i class="mdui-icon mdui-icon-left material-icons"><%= (icon?"star":"person") %></i> <%= username %> (<%= id %>) </button>
     </div>
-    <div class="mdui-tab mdui-tab-full-width mdui-color-blue-600"></div>
+    <div class="mdui-tab mdui-tab-full-width mdui-color-theme-600"></div>
 </header>
 
-<div id="top-container" class="mdui-container-fluid mdui-color-blue-600">
+<aside class="mdui-drawer mdui-drawer-close mdui-shadow-6">
+    <div class="user-info">
+        <div class="user-info-name"><%= username %></div>
+        <div class="user-info-id"><%= id %></div>   
+    </div>
+    <div class="mdui-divider"></div>
+    <div class="mdui-list">
+        <a href="javascript:showAnnouncement(true);" class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">announcement</i>
+            <div class="mdui-list-item-content">公告</div>
+        </a>
+        <div class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">brightness_2</i>
+            <div class="mdui-list-item-content">夜间模式</div>
+            <label class="mdui-switch">
+                <input id="nightmode_switch" type="checkbox" onclick="changeNightMode();">
+                <i class="mdui-switch-icon"></i>
+            </label>
+        </div>
+        <a href="/logout" class="mdui-list-item mdui-ripple">
+            <i class="mdui-list-item-icon mdui-icon material-icons">exit_to_app</i>
+            <div class="mdui-list-item-content">退出登录</div>
+        </a>
+    </div>
+</aside>
+
+<div id="top-container" class="mdui-container-fluid mdui-color-theme-600 mdui-shadow-6">
     <div id="announcement-dialog" class="mdui-dialog">
         <div class="mdui-dialog-title"></div>
         <div class="mdui-dialog-content"></div>
@@ -43,13 +50,13 @@
     <div id="main-card" class="mdui-card mdui-center mdui-shadow-12">
         <div id="button-row" class="mdui-row">
             <div class="mdui-col-xs-4">
-                <button onclick="refreshPanel()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">刷新</button>      
+                <button onclick="refreshPanel()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-600">刷新</button>      
             </div>
             <div class="mdui-col-xs-4">
-                <button onclick="submit()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">预约</button>
+                <button onclick="submit()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-600">预约</button>
             </div>
             <div class="mdui-col-xs-4">
-                <button onclick="deleteHistory()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme" <%= delButton %> >删除记录</button>
+                <button onclick="deleteHistory()" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme-600" <%= delButton %> >删除记录</button>
             </div>
         </div>
     </div>

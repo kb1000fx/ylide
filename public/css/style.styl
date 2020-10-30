@@ -24,13 +24,26 @@
     margin-bottom: 5vh
 }
 
-#user-info {
-    margin-right: 20px
-    & button{
-        font-size: 18px 
+#right-header-btn {
+    font-size: 18px 
+    line-height: 36px
+}
+
+.user-info {
+    margin: 15px 0
+    text-align: center
+    & .user-info-name {
+        font-size: 24px
+        line-height: 1.25
+        font-weight: 700
+        opacity: 0.75
+        margin-bottom: 5px
     }
-    & ul{
-       color: rgba(0,0,0,.54); 
+    & .user-info-id {
+        font-size: 18px
+        line-height: 1.5
+        font-weight: 600
+        opacity: 0.55
     }
 }
 
@@ -83,6 +96,9 @@
     }
     .layui-laydate-main{
         width: 100% !important
+    }
+    #right-header-btn {
+        display: none    
     }
 }
 
