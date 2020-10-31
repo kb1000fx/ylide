@@ -1,12 +1,13 @@
 {
   "name": "ReservationServer",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "scripts": {
-    "start": "cross-env NODE_ENV=production node ./bin/www",
+    "start": "gulp start",
+    "debug": "cross-env DEBUG=express:* gulp start",
     "admin": "node ./bin/admin",
     "refresh": "node ./bin/refresh && npm start",
-    "dev": "cross-env NODE_ENV=development nodemon ./bin/www"
+    "updateDB": "node ./bin/updateDB"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -18,16 +19,20 @@
     "express-session": "^1.17.1",
     "http-errors": "~1.6.3",
     "js-yaml": "^3.14.0",
-    "morgan": "~1.9.1",
+    "log4js": "^6.3.0",
     "sqlite3": "^5.0.0",
     "stylus": "^0.54.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
     "cross-env": "^7.0.2",
-    "nodemon": "^2.0.6"
-  },
-  "nodemonConfig": { 
-    "ignore": "./public/",
-    "ext": "js json ejs yaml"
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-nodemon": "^2.5.0",
+    "gulp-sourcemaps": "^2.6.5",
+    "gulp-stylus": "^2.7.0",
+    "gulp-uglify": "^3.0.2"
   }
 }
