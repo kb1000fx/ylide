@@ -11,19 +11,39 @@
 }
 
 #top-container {
-    height: 30vh
+    height: 40vh
+}
+
+#bottom-container {
+    height: 10px
 }
 
 #main-card {
-    top: -10vh
+    top: -35vh
     padding: 10px
+    margin-bottom: 5vh
 }
 
-#user-info {
-    margin-right: 20px
-    margin-top: 20px
-    & button{
-        font-size: 18px 
+#right-header-btn {
+    font-size: 18px 
+    line-height: 36px
+}
+
+.user-info {
+    margin: 15px 0
+    text-align: center
+    & .user-info-name {
+        font-size: 24px
+        line-height: 1.25
+        font-weight: 700
+        opacity: 0.75
+        margin-bottom: 5px
+    }
+    & .user-info-id {
+        font-size: 18px
+        line-height: 1.5
+        font-weight: 600
+        opacity: 0.55
     }
 }
 
@@ -65,7 +85,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .panel-temperature, .panel-material {
+    .panel-attach {
         display: none;
     }
     .layui-laydate-content table{
@@ -76,6 +96,9 @@
     }
     .layui-laydate-main{
         width: 100% !important
+    }
+    #right-header-btn {
+        display: none    
     }
 }
 
@@ -108,10 +131,4 @@
 #button-row{
     text-align: center
     margin-bottom: 10px
-}
-
-#top-title{
-    text-align: center
-    font-size: 4vh
-    padding-top: 8vh
 }

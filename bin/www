@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('Reservation-Server:server');
+var app = require('../lib/app');
+var debug = require('debug')('app');
 var http = require('http');
 
 /**

@@ -103,8 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+# except
 data.db
-
 sessions
-
-public/css/style.css
+public/css/
+public/js/
+log/
