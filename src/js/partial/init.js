@@ -17,7 +17,7 @@ function initItemPanel(){
                                             '<div class="mdui-panel-item-summary head-font">使用者</div>'+
                                             ((eTab.header)?(
                                                 eTab.header.map(e => {
-                                                    return '<div class="mdui-panel-item-summary panel-material head-font">' + e + '</div>'
+                                                    return '<div class="mdui-panel-item-summary panel-attach head-font">' + e + '</div>'
                                                 }).join('')
                                             ):'')+
                                             ((eTab.showTimeInfo)?(

@@ -16,6 +16,10 @@ function nodemonRun(cb) {
     cb();
 }
 
+function copy(){
+    return  gulp.src('public/**/*').pipe(gulp.dest('dist'));
+}
+
 function compileCSS() {
     return gulp.src('src/styl/*.styl')
             .pipe(sourcemaps.init())
@@ -23,7 +27,7 @@ function compileCSS() {
                 compress: true
             }))
             .pipe(sourcemaps.write('./'))
-            .pipe(gulp.dest('public/css'));
+            .pipe(gulp.dest('dist/css'));
 }
 
 function compileMainJS() {
@@ -35,7 +39,7 @@ function compileMainJS() {
                 }))        
                 .pipe(uglify())            
                 .pipe(sourcemaps.write('./'))
-                .pipe(gulp.dest('public/js'));
+                .pipe(gulp.dest('dist/js'));
 }
 
 function compileDepJS() {
@@ -44,10 +48,10 @@ function compileDepJS() {
                 .pipe(concat('dependencies.js'))                     
                 .pipe(uglify())            
                 .pipe(sourcemaps.write('./'))
-                .pipe(gulp.dest('public/js'));  
+                .pipe(gulp.dest('dist/js'));  
 }
 
-var preprocess = gulp.parallel(compileCSS, compileMainJS, compileDepJS);
+var preprocess = gulp.parallel(copy, compileCSS, compileMainJS, compileDepJS);
 
 gulp.watch('src/css/*.styl', compileCSS);
 gulp.watch('src/js/partial/*.js', compileMainJS);
