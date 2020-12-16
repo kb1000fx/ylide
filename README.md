@@ -29,13 +29,18 @@ npm run debug
 npm run admin <UserID1> <UserID2> <UserID3>...
 ```
 将已注册的指定账户设为管理员，仅管理员可对历史记录进行删除
-### 刷新数据库
+### 重建数据库
 执行后会删除数据库中已有的`Item`与`History`表，并重新读取`config.yaml`文件中的配置进行建立
-用于修改或删除`config.yaml`文件中设备信息后对数据库进行刷新(新增设备无需刷新)
+相当于在保留用户数据的情况下进行初始化
 ```bash
-npm run refresh
+npm run rebuild
 ```
 >当然，直接删除数据库文件也可以达到目的，但是这样会同时丢失已注册的账户信息
+### 刷新数据库
+执行后会根据`config.yaml`文件与`History`表中的记录重建`Item`表，用于解决某些情况下`Item`与`History`表记录冲突的问题，也可用于修改或删除`config.yaml`文件中设备信息后对数据库进行刷新(新增设备无需刷新)
+```
+npm run refresh
+```
 ### 更新数据库
 用于将0.1.0版本的数据库文件更新为0.2.0的格式
 ```

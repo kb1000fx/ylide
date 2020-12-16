@@ -6,6 +6,7 @@
     "start": "gulp start",
     "debug": "cross-env DEBUG=express:* gulp start",
     "admin": "node ./bin/admin",
+    "rebuild": "node ./bin/rebuild && npm start",
     "refresh": "node ./bin/refresh && npm start",
     "updateDB": "node ./bin/updateDB"
   },
