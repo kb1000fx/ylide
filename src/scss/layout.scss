@@ -1,0 +1,45 @@
+//Footer
+// ---------------------------------------------------
+.main-footer {
+    background-color: #f8f9fa;
+    i, svg {
+        font-size: 24px;
+    } 
+    &.login-footer {
+        background-color: #f4f6f9 ;
+        border-top-width: 0;
+        margin-left: 0 !important;
+    }
+}
+
+//Content Wrapper
+// ---------------------------------------------------
+.content-wrapper {
+    padding: 20px 0px;
+}
+
+//SideBar
+// ---------------------------------------------------
+.sidebar {
+    overflow: hidden !important;
+}
+
+//Login Page
+// ---------------------------------------------------
+.no-sidebar {
+    margin-left: 0 !important;
+}
+
+#login-card {
+    width: 100%;
+    @include media-breakpoint-up(sm){
+        width: 75%;
+    }
+    @include media-breakpoint-up(md){
+        width: 480px;
+    }
+    @include media-breakpoint-up(lg){
+        width: 560px;
+    }
+}
+

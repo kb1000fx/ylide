@@ -1,0 +1,10 @@
+{% macro footer(layout, value='') %}
+    <footer class="main-footer text-center {{ value }}">
+        <span>
+            {{ layout.year }} 
+            <i class="fab fa-github"></i>
+            <strong><a target="_blank" href="https://github.com/kb1000fx/ylide">YLIDE</a></strong>
+            {{ layout.version }}
+        </span>
+    </footer>
+{% endmacro %}

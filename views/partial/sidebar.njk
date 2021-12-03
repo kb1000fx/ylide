@@ -1,0 +1,56 @@
+<aside class="main-sidebar sidebar-no-expand sidebar-dark-primary overflow-hidden elevation-4">
+    <div class="brand-link text-center">
+        <span class="brand-text font-weight-bold">{{ layout.website }}</span>
+    </div>
+    <div class="sidebar">
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ layout.UserImg }}" class="img-circle elevation-2">
+            </div>
+            <div class="info">
+                <strong><a href="#" class="d-block">{{ layout.UserName }}</a></strong>
+            </div>
+        </div>
+        <nav class="mt-2">
+            <ul  class="nav nav-sidebar">
+                <li class="nav-item ">
+                    <a href="/" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>主页</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/account" class="nav-link">
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>帐号</p>
+                    </a>
+                </li>
+                <li class="nav-header">设置</li>
+                <li class="nav-item" id="sidebar-notice">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>公告</p>
+                    </a>
+                </li>
+                <li class="nav-item" id="sidebar-dark">
+                    <a href="#NightMode" class="nav-link">
+                        <i class="nav-icon fas fa-moon"></i>
+                        <p>夜间模式</p>
+                    </a>
+                </li>
+                <li class="nav-item" id="sidebar-light">
+                    <a href="#NightMode" class="nav-link">
+                        <i class="nav-icon fas fa-sun"></i>
+                        <p>日间模式</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link sign-out">
+                        <i class="nav-icon fas fa-sign-out-alt"></i>
+                        <p>退出</p>
+                    </a>
+                </li>                      
+            </ul>
+        </nav>
+    </div>
+</aside>

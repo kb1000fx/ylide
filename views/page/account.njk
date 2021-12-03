@@ -1,0 +1,86 @@
+{% extends 'views/main.njk' %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row justify-content-md-center">
+            <div class="col-md-10">
+                <div class="card card-primary card-outline">
+                    <div class="card-body box-profile">
+                        <div class="row">
+                            <div class="col-2">
+                                <div class="nav flex-column nav-pills" role="tablist">
+                                    <a class="nav-link active" id="tab-title-profile" data-toggle="pill" href="#tab-profile" role="tab">个人资料</a>
+                                    <a class="nav-link" id="tab-title-history" data-toggle="pill" href="#tab-history" role="tab">预约记录</a>
+                                </div>
+                            </div>
+                            <div class="col-10">
+                                <div class="tab-content">
+                                    <div class="tab-pane fade show active" id="tab-profile" role="tabpanel">
+                                        <div class="row justify-content-center mb-3 mb-lg-5">
+                                            <div class="text-center">
+                                                <img class="profile-user-img img-fluid img-circle" src="{{ layout.UserImg }}">
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center mb-3">                                     
+                                            <div class="col col-lg-3 justify-content-center d-flex">
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="avatarRadio1" name="avatarRadio" value="gravatar"
+                                                        {% if(account.avatar === "gravatar") %}
+                                                            checked
+                                                        {% endif %}>
+                                                    <label for="avatarRadio1" class="custom-control-label">Gravatar</label>
+                                                </div>
+                                            </div>
+                                            <div class="col col-lg-3 justify-content-center d-flex">
+                                                <div class="custom-control custom-radio">
+                                                    <input class="custom-control-input" type="radio" id="avatarRadio2" name="avatarRadio" value="qqavatar" 
+                                                        {% if(account.avatar === "qqavatar") %}
+                                                            checked
+                                                        {% endif %}>
+                                                    <label for="avatarRadio2" class="custom-control-label">QQ头像</label>
+                                                </div>
+                                            </div>                                                         
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="studentID-input">学号 <code>*</code></label>
+                                            <input type="text" class="form-control" id="studentID-input" value="{{ account.studentID }}" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email-input">邮箱 <code>*</code></label>
+                                            <input type="text" class="form-control" id="email-input" value="{{ account.email }}" disabled>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email-input">姓名 <code>*</code></label>
+                                            <input type="text" class="form-control" id="name-input" value="{{ account.name }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email-input">QQ</label>
+                                            <input type="text" class="form-control" pattern="[0-9]{16}" id="qq-input" value="{{ account.qq }}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="email-input">密码</label>
+                                            <input type="password" class="form-control" id="password-input" placeholder="未改变">
+                                        </div>
+                                        <div class="row pt-4 justify-content-end"> 
+                                            <div class="col col-4 justify-content-center d-flex">
+                                                <button type="button" id="save-profile-btn" class="btn btn-primary">保存</button>
+                                            </div>    
+                                        </div>    
+                                    </div>
+                                    <div class="tab-pane fade" id="tab-history" role="tabpanel">
+                                        ...
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    {{ super() }}
+    <script src="account.js"></script>
+{% endblock %}

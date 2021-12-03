@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+        {% include "./partial/head.njk" %}
+    </head>
+
+    <body class="sidebar-mini layout-fixed">
+        {% include "./partial/sidebar.njk" %}
+        {% include "./partial/nav.njk" %}
+        {% include "./partial/noticeModal.njk" %}
+
+        <div class="content-wrapper">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        {% from "./partial/footer.njk" import footer %}
+        {{ footer(layout) }}
+        
+        {% block script %}
+            <script src="vendor.js"></script>
+            <script src="layout.js"></script>
+        {% endblock %}
+    </body>
+</html>

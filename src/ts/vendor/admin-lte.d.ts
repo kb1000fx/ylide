@@ -1,0 +1,11 @@
+declare module 'admin-lte/build/js/ControlSidebar';
+declare module 'admin-lte/build/js/CardWidget';
+declare module 'admin-lte/build/js/Dropdown';
+declare module 'admin-lte/build/js/CardRefresh';
+declare module 'admin-lte/build/js/ExpandableTable';
+declare module 'admin-lte/build/js/Treeview';
+declare module 'admin-lte/build/js/TodoList';
+declare module 'admin-lte/build/js/Fullscreen';
+declare module 'admin-lte/build/js/Toasts';
+declare module 'admin-lte/build/js/Layout';
+declare module 'admin-lte/build/js/PushMenu';
