@@ -1,5 +1,6 @@
 import DarkMode from "./layout/DarkMode";
 import Notice from "./layout/Notice"
+import LogOut from "./layout/LogOut"
 
 console.log(`jQuery version: ${jQuery.fn.jquery}`);
 
@@ -9,17 +10,12 @@ $(function(){
     $("#sidebar-light").on("click", DarkMode.delDark);
     $("#sidebar-dark").on("click", DarkMode.addDark);
 
-    //抽屉导航
-    //$("body").addClass(["sidebar-mini", "layout-fixed"]);
-
     //退出
-    $(".sign-out").on("click", function(){
-        console.log("sign-out")
-    });
+    $(".sign-out").on("click", LogOut);
 
     //公告
     $("#sidebar-notice").on("click", function(){
-        console.log("notice");
+        //console.log("notice");
         Notice.showNotice()
     });
 });

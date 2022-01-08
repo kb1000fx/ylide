@@ -2,6 +2,8 @@ import { Context, DefaultState, Next } from "koa";
 import Router from "koa-router";
 import CONFIG from "../config";
 
+import DB from "../middleware/Database";
+
 const router = new Router<DefaultState, Context>();
 
 const layout = {
@@ -43,6 +45,9 @@ router.get('/account', async (ctx:Context, next:Next) => {
 });
 
 router.get('/login', async (ctx:Context, next:Next) => {
+    //console.log(DB.getInstance())
+    let db = await DB.getInstance()
+    console.log(db)
     await ctx.render('login', layout)
 });
 

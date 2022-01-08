@@ -41,5 +41,19 @@
     @include media-breakpoint-up(lg){
         width: 560px;
     }
+    .input-group{
+        div.input-group-text {
+            background-color: transparent;
+            border-left-width: 0;
+        }
+    }
+    input.form-control{
+        border-right-width: 0;
+        &.is-invalid~div .input-group-text {
+            border-color: rgb(220, 53, 69);
+        }
+        &:focus~div .input-group-text{
+            border-color: rgb(130, 186, 250);
+        }
+    }
 }
-

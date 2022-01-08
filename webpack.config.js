@@ -11,6 +11,7 @@ module.exports = {
         vendor: ["./src/ts/vendor.ts"],
         layout: ["./src/ts/layout.ts"],
         account: ["./src/ts/account.ts"],
+        login: ["./src/ts/login.ts"],
     },
     output: {
         filename: "[name].js",
@@ -51,6 +52,13 @@ module.exports = {
                 loader: "expose-loader",
                 options: {
                   exposes: ["$", "jQuery"],
+                },
+            },        
+            {
+                test: require.resolve("axios"),
+                loader: "expose-loader",
+                options: {
+                  exposes: "axios",
                 },
             },
         ]

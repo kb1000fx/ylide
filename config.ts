@@ -5,4 +5,5 @@ export default {
     version: pkgJSON.version,
     port: 3000,
     notice: "公告12334<br>www哈哈哈哈哈",
+    secret: "my_app_secret",
 }

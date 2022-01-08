@@ -1,20 +1,22 @@
+import axios from "axios";
+
 class Notice {
     static showNotice(){
-        //let a = "";
         $("#noticeModal").modal("show");
         this.getNotice();     
     };
 
     static getNotice(){
-        $.ajax({
-            method: "GET",
-            url: "/api/getNotice",
-        }).done(function( msg ) {
-            console.log( msg );
-            $(".modal-body").html(msg.msg)
+        axios({
+            url: '/api/getNotice',
+            method: 'get', 
+        }).then(function(response) {
+            console.log(response);
+            $(".modal-body").html(response.data.msg)
+        }).catch(function(e){
+            console.log(e.response)
         });
     };
 }
-
 
 export default Notice

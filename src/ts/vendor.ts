@@ -7,8 +7,9 @@ import "./vendor/admin-lte";
 
 import "../scss/vendor.scss";
 
-/* Fontawesome */
+import "axios";
 
+/* Fontawesome */
 import fontawesome from "@fortawesome/fontawesome";
 import faBell from "@fortawesome/fontawesome-free-solid/faBell";
 import faExpandArrowsAlt from "@fortawesome/fontawesome-free-solid/faExpandArrowsAlt";
@@ -20,6 +21,7 @@ import faMoon from "@fortawesome/fontawesome-free-solid/faMoon";
 import faSun from "@fortawesome/fontawesome-free-solid/faSun";
 import faUser from "@fortawesome/fontawesome-free-solid/faUser";
 import faClipboardList from "@fortawesome/fontawesome-free-solid/faClipboardList";
+import faLock from "@fortawesome/fontawesome-free-solid/faLock";
 
 fontawesome.library.add(
     faBell,
@@ -32,4 +34,5 @@ fontawesome.library.add(
     faSun,
     faUser,
     faClipboardList,
+    faLock,
 );

@@ -4,7 +4,4 @@ $(function(){
     $("#save-profile-btn").on("click", function() {
         new SubmitProfile().submit()
     });
-
-
-
 });

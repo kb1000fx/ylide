@@ -11,7 +11,10 @@
     "ext": "js,json,ts,njk",
     "watch": [
         "routes/",
-        "views/"
+        "views/",
+        "middleware/"
     ],
-    "exec": "ts-node ./app.ts"
+    "execMap": {
+        "ts": "node -r ts-node/register"
+    }
 }

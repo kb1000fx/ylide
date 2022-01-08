@@ -19,16 +19,39 @@
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
-                        <div class="tab-pane  show active" id="login-tabContent" role="tabpanel">
-                            <div class="input-group mb-3">
-                                <input type="email" class="form-control" placeholder="Email">
+                        <div class="tab-pane show active" id="login-tabContent" role="tabpanel">
+                            <div class="input-group mb-3" id="login-studentID-input">
+                                <input type="email" class="form-control" placeholder="学号">
                                 <div class="input-group-append">
                                     <div class="input-group-text">
-                                    <span class="fas fa-home"></span>
+                                        <span class="fas fa-home"></span>
                                     </div>
                                 </div>
+                                <div class="invalid-feedback">请输入正确格式的学号</div>
                             </div>
-                            
+                            <div class="input-group mb-3" id="login-password-input">
+                                <input type="password" class="form-control" placeholder="密码">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-lock"></span>
+                                    </div>
+                                </div>
+                                <div class="invalid-feedback">请输入正确格式的密码</div>
+                            </div>
+                            <div class="row justify-content-center mb-3">  
+                                <div class="col col-lg-3 justify-content-center d-flex">
+                                    <div class="custom-control custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input" id="rememberCheckbox">
+                                        <label class="custom-control-label" for="rememberCheckbox">记住密码</label>
+                                    </div>
+                                </div>
+                                <div class="col col-lg-3 justify-content-center d-flex">
+                                    <a href="213">23131</a>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-center">
+                                <button type="button" class="btn btn-primary" id="login-btn">登录</button>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="signin-tabContent" role="tabpanel">
                             Mauris tincidunt mi at erat gravida, eget tristique urna bibendum. Mauris pharetra purus ut ligula tempor, et vulputate metus facilisis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas sollicitudin, nisi a luctus interdum, nisl ligula placerat mi, quis posuere purus ligula eu lectus. Donec nunc tellus, elementum sit amet ultricies at, posuere nec nunc. Nunc euismod pellentesque diam.
@@ -41,5 +64,6 @@
         {% from "views/partial/footer.njk" import footer %}
         {{ footer(layout, "login-footer") }}    
         <script src="vendor.js"></script>
+        <script src="login.js"></script>
     </body>
 </html>
