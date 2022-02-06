@@ -1,5 +1,6 @@
 import sqlite3 from 'sqlite3'
 import { open, Database } from 'sqlite'
+import path from "path"
 
 sqlite3.verbose()
 
@@ -11,10 +12,13 @@ export default class DB {
         if (!DB.instance) {
             DB.instance = new DB();
             DB.instance.db = await open({
-                filename: `${__dirname}/database.db`,
+                filename: path.resolve(__dirname, "../database.db"),
                 driver: sqlite3.Database,
             })
         }
         return DB.instance.db;
+    }
+    public static async close() {
+        await DB.instance.db?.close()
     }
 }

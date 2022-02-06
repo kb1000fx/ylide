@@ -2,6 +2,7 @@ import Koa from "koa";
 import server from "koa-static";
 import views from "koa-views";
 import bodyParser from "koa-bodyparser";
+import path from "path"
 
 import Redirect from "./middleware/Redirect";
 import Auth from "./middleware/Auth";
@@ -18,9 +19,9 @@ app.use(Redirect);
 //app.use(Database);
 
 // 静态资源
-app.use(server(`${__dirname}/dist`));
+app.use(server(path.resolve(__dirname, "./dist")));
 // 模板引擎
-app.use(views(`${__dirname}/views/page`, {
+app.use(views(path.resolve(__dirname, "./views/page"), {
     extension: "njk",
     map: {
         njk: "nunjucks",

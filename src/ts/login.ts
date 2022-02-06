@@ -1,4 +1,5 @@
 import LoginSubmit from "./login/LoginSubmit"
+import SignUpSubmit from "./login/SignUpSubmit"
 import Validate from "./login/Validate"
 
 $(function(){
@@ -6,9 +7,12 @@ $(function(){
         if((Validate.validateLogID())&&(Validate.validateLogPWD())){
             LoginSubmit.submit()
         }
-        //console.log($("#login-studentID-input input").hasClass("is-invalid")&&($("#login-password-input input").hasClass("is-invalid")))
-        //
-        //console.log(flag)
+    });
+
+    $("#login-btn").on("click", ()=>{
+        //if((Validate.validateLogID())&&(Validate.validateLogPWD())){
+            SignUpSubmit.submit()
+        //}
     });
 
     $("#login-studentID-input input").on("blur", Validate.validateLogID);
